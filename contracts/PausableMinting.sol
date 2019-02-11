@@ -6,14 +6,14 @@ import "../node_modules/openzeppelin-solidity/contracts/token/ERC20/ERC20Mintabl
 /**
   * @title Contarct with minting process enabled at the beginning. Minting can be disabled permanently by owner
  */
-contract FinalizableMinting is Ownable, ERC20Mintable {
-  bool private _mintFinalized;
+contract PausableMinting is Ownable, ERC20Mintable {
+  bool private _mintPaused;
 
 /**
-  * @dev Checks if minting is allowed
+  * @dev Checks if minting is not paused
  */
-  modifier whileMintAllowed() {
-    require(!_mintFinalized, "mint is finalized");
+  modifier whileMintNotPaused() {
+    require(!_mintPaused, "mint is paused");
     _;
   }
 
@@ -21,19 +21,28 @@ contract FinalizableMinting is Ownable, ERC20Mintable {
   }
 
 /**
-  * @dev Disables minting permanently. 
+  * @dev Pauses minting. 
   * Can be called ny owner only
  */
-  function finalizeMint() external onlyOwner whileMintAllowed {
-    _mintFinalized = true;
+  function pauseMint() external onlyOwner whileMintNotPaused {
+    _mintPaused = true;
+  }
+
+  /**
+   * @dev Pauses minting. 
+   * Can be called ny owner only
+  */
+  function unpauseMint() external onlyOwner {
+    require(_mintPaused);
+    _mintPaused = false;
   }
 
 /**
-  * @dev Checks if minting is finalized.
+  * @dev Checks if minting is paused.
   * @return A boolean that indicates if minting is allowed.
  */
-  function mintFinalized() view public returns(bool) {
-    return _mintFinalized;
+  function mintPaused() view public returns(bool) {
+    return _mintPaused;
   }
 
   /**
@@ -42,7 +51,7 @@ contract FinalizableMinting is Ownable, ERC20Mintable {
     * @param value The amount of tokens to mint.
     * @return A boolean that indicates if the operation was successful.
     */
-  function mint(address to, uint256 value) public onlyMinter whileMintAllowed returns (bool) {
+  function mint(address to, uint256 value) public onlyMinter whileMintNotPaused returns (bool) {
       _mint(to, value);
       return true;
   }
