@@ -4,7 +4,7 @@ import BigNumber from "bignumber.js";
 
 const TestCoinlinkToken = artifacts.require("../contracts/TestCoinlinkToken.sol");
 
-contract("TestCoinlinkToken", (accounts) => {
+contract("CoinlinkToken", (accounts) => {
   const TOKEN_NAME = "Test Coinlinked Token";
   const TOKEN_SYMBOL = "TestCLT";
   const TOKEN_DECIMALS = 18;
@@ -54,31 +54,6 @@ contract("TestCoinlinkToken", (accounts) => {
         from: ADDR_2
       });
       assert.equal(new BigNumber(await token.balanceOf.call(ADDR_1)).toNumber(), TOKEN_AMOUNT_ADDR_1, "wrong token balance after transfer");
-    });
-
-    it("should finalize minting by owner", async () => {
-      assert.isFalse(await token.mintFinalized.call(), "mint should be allowed");
-      await token.finalizeMint();
-      assert.isTrue(await token.mintFinalized.call(), "mint should be finalized");
-    });
-
-    it("should not mint when minting is finalized", async () => {
-      const TOKEN_AMOUNT_ADDR_1 = 113;
-
-      //  minting is allowed
-      await token.mint(ADDR_1, TOKEN_AMOUNT_ADDR_1);
-      await token.finalizeMint();
-      await expectThrow(token.mint(ADDR_1, TOKEN_AMOUNT_ADDR_1), "should throw, when minting is finalized");
-    });
-
-    it("should allow finalize minting by owner", async () => {
-      await token.finalizeMint.call();
-    });
-
-    it("should not allow finalize minting by other address, but owner", async () => {
-      await expectThrow(token.finalizeMint({
-        from: ADDR_1
-      }), "should throw is not owner tries to finalize minting");
     });
   });
 });
