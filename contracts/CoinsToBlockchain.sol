@@ -14,14 +14,15 @@ contract CoinsToBlockchain is Ownable {
   mapping(address => uint256) public claimBalance;
 
 
-  /**
-   * @dev Checks if balance of this contract is enough for total transfers.
-   * @param _totalAmount Total amount of tokens to be transferred
-   */
-  modifier balanceEnough(uint256 _totalAmount) {
-    require(_totalAmount <= address(this).balance, "not enough balance");
-    _;
-  }
+  //  NOT TESTED
+  // /**
+  //  * @dev Checks if balance of this contract is enough for total transfers.
+  //  * @param _totalAmount Total amount of tokens to be transferred
+  //  */
+  // modifier balanceEnough(uint256 _totalAmount) {
+  //   require(_totalAmount <= address(this).balance, "not enough balance");
+  //   _;
+  // }
 
   /**
    * @dev Constructor for contract.
