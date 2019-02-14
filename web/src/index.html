@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quick Quick</title>
+    <link rel="icon" type="image/x-icon" href="https://s.dou.ua/CACHE/images/img/static/companies/Logo-dou22-01/caa73a1f1f8f0bb1eff13eee68c59210.png" />
+    <!-- <link rel="icon" type="image/png" href="https://cdn.onlinewebfonts.com/svg/img_512183.png"> -->
+    <script src="index.js"></script>
+
+    <style>
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 20px;
+            height: 20px;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
+            }
+            
+            @-webkit-keyframes spin {
+              0% { -webkit-transform: rotate(0deg); }
+              100% { -webkit-transform: rotate(360deg); }
+            }
+            
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+            </style>
+</head>
+
+<body>
+    <div style="width: 50%; background-color:blanchedalmond; float: left;">
+        <h3 style="text-align: center">User</h3>
+        <div>
+            <label id="currentAddress" style="font-weight: bold;">...</label>
+            <label> owns </label><label id="currentAddressBalance" style="font-weight: bold;">...</label><label> ether</label>
+            <label> & </label><label id="tokenBalance" style="font-weight: bold;"> ... </label><label> TTT</label>
+        </div>
+    </div>
+
+    <div style="width: 50%; background-color:cornsilk; float: left;">
+        <h3 style="text-align: center">Owner</h3>
+        <div>
+            <label>Token owner: </label><label id="Owner_owner_address" style="font-weight: bold;">...</label>
+            <label> owns: </label><label id="Owner_owner_balance" style="font-weight: bold;">...</label><label> TTT</label>
+            <div>
+                <button onclick="App.mintToOwner()">Mint to owner 1 full token</button>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h3>Transfer</h3>
+        <label>to </label><input id="Transfer_toAddress" type="text" placeholder="to address"></input>
+        <label> ether amount </label><input id="Transfer_amount" type="text" placeholder="TTT amount"></input>
+        <button onclick="App.transferFunds()">Go!</button>
+        <div id="Transfer_loader" class="loader" style="visibility: hidden;"></div>
+
+        <div id="transferToInfo" style="margin-top: 10px; visibility: hidden;">
+            <h4>Last transfer info</h4>
+            <label id="transferToInfo_addr"></label>...<label> balance: </label><label id="transferToInfo_balance">...</label>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
