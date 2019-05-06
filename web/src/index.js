@@ -64,6 +64,7 @@ const App = {
 
     updateOwnerInfo: async () => {
         App.tokenOwnerAddr = await App.getTokenOwner();
+        console.log(App.tokenOwnerAddr);
         document.getElementById("Owner_owner_address").innerText = App.tokenOwnerAddr;
         document.getElementById("Owner_owner_balance").innerText = await App.getTokenBalance(App.tokenOwnerAddr);
     },

@@ -1,6 +1,6 @@
 let Token = {
-    address: "0x923a8990fd772ad84ed686d9f1cc7b4742e0c317",
-    // address: "0x76251881D525a0D985a86952AB9a8BCF50975Cfb", //    Ganache
+    // address: "0x923a8990fd772ad84ed686d9f1cc7b4742e0c317",
+    address: "0x9DD2dCfA231C937349C707ce7c7859757815f588", //    Ganache
     abi: [{
             "constant": true,
             "inputs": [],
